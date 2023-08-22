@@ -12,3 +12,91 @@ body {
 p {
   font-size: 14px;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-cl {
+  flex-direction: column;
+}
+
+.flex-jc-c {
+  justify-content: center;
+}
+
+.flex-jc-sb {
+  justify-content: space-between;
+}
+
+.flex-ai-c {
+  align-items: center;
+}
+
+.flex-ai-sb {
+  align-items: space-between;
+}
+
+.p0 {
+  padding: 0;
+}
+
+.p1 {
+  padding: 5px;
+}
+
+.p2 {
+  padding: 10px;
+}
+
+.p3 {
+  padding: 15px;
+}
+
+.p4 {
+  padding: 20px;
+}
+
+.p6 {
+  padding: 40px;
+}
+
+.ptb6 {
+  padding: 40px 0;
+}
+
+.m0 {
+  margin: 0;
+}
+
+.m1 {
+  margin: 5px;
+}
+
+.m2 {
+  margin: 10px;
+}
+
+.m3 {
+  margin: 15px;
+}
+
+.m4 {
+  margin: 20px;
+}
+
+.m6 {
+  margin: 40px;
+}
+
+.mtb2 {
+  margin: 10px 0;
+}
+
+.mtb4 {
+  margin: 20px 0;
+}
+
+.mtb6 {
+  margin: 40px 0;
+}

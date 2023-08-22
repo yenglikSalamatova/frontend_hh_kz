@@ -32,3 +32,14 @@
   background-color: #1785e5;
   color: #fff;
 }
+
+.button-secondary-bordered {
+  background-color: #fafafa;
+  border: 1px solid #bcbebf;
+  color: #303233;
+  transition: 0.3s all;
+}
+
+.button-secondary-bordered:hover {
+  background-color: #ececec;
+}

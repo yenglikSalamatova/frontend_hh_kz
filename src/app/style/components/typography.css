@@ -1,7 +1,19 @@
 h1 {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
 }
 .text-light {
   color: #909090;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.a-h3 {
+  cursor: pointer;
+  color: #1785e5;
+  font-size: 18px;
+  font-weight: 700;
 }
