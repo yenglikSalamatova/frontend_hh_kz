@@ -1,0 +1,52 @@
+.fieldset {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  border: none;
+  outline: none;
+  padding: 20px 0;
+}
+
+.fieldset-start {
+  align-items: start;
+}
+
+.fieldset .input {
+  /* width: 25%; */
+}
+
+/* stylize fieldset all versions small middle large */
+
+.fieldset-sm {
+  width: 45%;
+}
+
+.fieldset-md {
+  width: 50%;
+}
+
+.fieldset-lg {
+  width: 60%;
+}
+
+.fieldset label {
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.salary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.salary .input:first-child {
+}
+.salary .input:nth-child(2) {
+  width: 30%;
+}
+.salary p {
+  width: 40%;
+}

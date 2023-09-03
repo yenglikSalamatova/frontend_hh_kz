@@ -7,3 +7,21 @@
   border: 1px solid #babdbf;
   outline: none;
 }
+
+.input:focus {
+  border: 1px solid #1a73e8;
+}
+
+.tag {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+  margin-left: 300px;
+  margin-bottom: 20px;
+}
+
+.tag i {
+  cursor: pointer;
+  margin-left: 5px;
+}
