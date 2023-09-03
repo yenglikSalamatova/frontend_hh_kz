@@ -103,6 +103,8 @@ export default function CreateResumePage() {
             <p>на руки</p>
           </div>
         </fieldset>
+
+        <h3 className="mtb4">Опыт работы</h3>
       </div>
     </main>
   );
