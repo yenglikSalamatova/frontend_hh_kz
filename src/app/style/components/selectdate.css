@@ -19,3 +19,22 @@
   border-left: none;
   border-right: none;
 }
+
+.selectdate-noday {
+  width: 40%;
+}
+
+.selectdate-noday .select {
+  border-left: 1px solid #d9d9d9;
+  border-radius: 5px 0 0 5px;
+}
+
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}

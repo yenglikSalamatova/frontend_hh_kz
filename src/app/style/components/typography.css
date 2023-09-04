@@ -16,6 +16,10 @@ h4 {
   font-weight: 700;
 }
 
+h5 {
+  font-size: 14px;
+}
+
 .a-h3 {
   cursor: pointer;
   color: #1785e5;

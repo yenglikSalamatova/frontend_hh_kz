@@ -8,10 +8,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AutoCompleteSelect from "@/components/AutoCompleteSelect";
 import SelectDate from "@/components/SelectDate";
+import ModalAddExp from "@/components/ModalAddExp";
+import WorkingHistory from "@/components/WorkingHistory";
 
 export default function CreateResumePage() {
   const [cities, setCities] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [workingHistories, setWorkingHistories] = useState([]);
 
   useEffect(() => {
     axios.get(`${END_POINT}/api/region/cities`, {}).then((res) => {
@@ -31,6 +35,22 @@ export default function CreateResumePage() {
 
   const onSelect = (data) => {
     console.log(data);
+  };
+
+  const handleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  const addWorkingHistory = (workingHistory) => {
+    setWorkingHistories((prev) => {
+      return [...prev, workingHistory];
+    });
+  };
+
+  const removeWorkingHistory = (workingHistory) => {
+    setWorkingHistories((prev) => {
+      return prev.filter((item) => item !== workingHistory);
+    });
   };
 
   return (
@@ -58,11 +78,11 @@ export default function CreateResumePage() {
           <div className="radio-group">
             <div className="radio">
               <input type="radio" name="gender" id="g1" />
-              <label for="g1">Мужской</label>
+              <label htmlFor="g1">Мужской</label>
             </div>
             <div className="radio">
               <input className="radio" type="radio" name="gender" id="g2" />
-              <label for="g2">Женский</label>
+              <label htmlFor="g2">Женский</label>
             </div>
           </div>
         </fieldset>
@@ -80,11 +100,11 @@ export default function CreateResumePage() {
           <div className="radio-group">
             <div className="radio">
               <input type="radio" name="experience" id="e1" />
-              <label for="e1">Есть опыт работы</label>
+              <label htmlFor="e1">Есть опыт работы</label>
             </div>
             <div className="radio">
               <input className="radio" type="radio" name="experience" id="e2" />
-              <label for="e2">Нет опыта работы</label>
+              <label htmlFor="e2">Нет опыта работы</label>
             </div>
           </div>
         </fieldset>
@@ -105,6 +125,33 @@ export default function CreateResumePage() {
         </fieldset>
 
         <h3 className="mtb4">Опыт работы</h3>
+
+        {modalOpen && (
+          <ModalAddExp
+            onToggle={handleModal}
+            addWorkingHistory={addWorkingHistory}
+          />
+        )}
+
+        <fieldset className={"fieldset fieldset-md fieldset-start"}>
+          <label>Места работы</label>
+          <div className="experience">
+            {workingHistories.map((item) => (
+              <WorkingHistory
+                item={item}
+                key={item.company_name}
+                remove={removeWorkingHistory}
+              />
+            ))}
+
+            <button
+              className="button button-primary--bordered"
+              onClick={handleModal}
+            >
+              Добавить место работы
+            </button>
+          </div>
+        </fieldset>
       </div>
     </main>
   );

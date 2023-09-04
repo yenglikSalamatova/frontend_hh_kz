@@ -22,18 +22,21 @@ export default function SelectDate({ label, size }) {
           placeholder="День"
         />
         <select onChange={onChangeMonth} className="input select">
-          <option value="1">января</option>
-          <option value="2">февраля</option>
-          <option value="3">марта</option>
-          <option value="4">апреля</option>
-          <option value="5">мая</option>
-          <option value="6">июня</option>
-          <option value="7">июля</option>
-          <option value="8">августа</option>
-          <option value="9">сентября</option>
-          <option value="10">октября</option>
-          <option value="11">ноября</option>
-          <option value="12">декабря</option>
+          <option value="" disabled hidden>
+            Месяц
+          </option>
+          <option value="0">января</option>
+          <option value="1">февраля</option>
+          <option value="2">марта</option>
+          <option value="3">апреля</option>
+          <option value="4">мая</option>
+          <option value="5">июня</option>
+          <option value="6">июля</option>
+          <option value="7">августа</option>
+          <option value="8">сентября</option>
+          <option value="9">октября</option>
+          <option value="10">ноября</option>
+          <option value="11">декабря</option>
         </select>
         <input
           placeholder="Год"

@@ -1,0 +1,26 @@
+.experience-item {
+  display: flex;
+  flex-direction: column;
+  padding: 17px;
+  box-sizing: border-box;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.experience-item__header p {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #1785e5;
+}
+.experience-item__header h4 {
+  margin-bottom: 15px;
+}
+
+.experience-item__remove {
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+  color: #e51717;
+  cursor: pointer;
+}
