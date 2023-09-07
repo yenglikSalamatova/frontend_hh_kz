@@ -35,3 +35,31 @@
   color: white;
   background-color: #1785e5;
 }
+
+.dropdown-tags {
+  width: 25%;
+  padding: 10px;
+  gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dropdown-tags h4 {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.dropdown-tags a {
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.dropdown-tags a:hover {
+  color: inherit;
+  background-color: transparent;
+  border: 1px solid rgb(154, 154, 154);
+}

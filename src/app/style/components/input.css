@@ -26,6 +26,18 @@
   margin-left: 5px;
 }
 
+.tags {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 300px;
+}
+
+.tags .tag {
+  margin: 0;
+}
+
 .textarea {
   font-family: inherit;
   width: 100%;

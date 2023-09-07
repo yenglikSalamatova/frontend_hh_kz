@@ -10,10 +10,12 @@ import AutoCompleteSelect from "@/components/AutoCompleteSelect";
 import SelectDate from "@/components/SelectDate";
 import ModalAddExp from "@/components/ModalAddExp";
 import WorkingHistory from "@/components/WorkingHistory";
+import AutoCompleteTags from "@/components/AutoCompleteTags";
 
 export default function CreateResumePage() {
   const [cities, setCities] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [skills, setSkills] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [workingHistories, setWorkingHistories] = useState([]);
 
@@ -28,6 +30,13 @@ export default function CreateResumePage() {
     axios.get(`${END_POINT}/api/region/countries`, {}).then((res) => {
       console.log("did mount");
       setCountries(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${END_POINT}/api/skills`, {}).then((res) => {
+      console.log("did mount");
+      setSkills(res.data);
     });
   }, []);
 
@@ -152,6 +161,19 @@ export default function CreateResumePage() {
             </button>
           </div>
         </fieldset>
+
+        <fieldset className={"fieldset fieldset-lg fieldset-start"}>
+          <label>О себе</label>
+          <textarea className="textarea" placeholder="Расскажите о себе" />
+        </fieldset>
+
+        <AutoCompleteTags
+          label="Ключевые навыки"
+          type="text"
+          size="fieldset-lg"
+          items={skills}
+          onSelect={onSelect}
+        />
       </div>
     </main>
   );
