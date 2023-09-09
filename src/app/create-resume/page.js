@@ -11,6 +11,9 @@ import SelectDate from "@/components/SelectDate";
 import ModalAddExp from "@/components/ModalAddExp";
 import WorkingHistory from "@/components/WorkingHistory";
 import AutoCompleteTags from "@/components/AutoCompleteTags";
+import AddEducation from "@/components/AddEducation";
+import AddLanguage from "@/components/AddLanguage";
+import SelectEmploymentTypes from "@/components/SelectEmploymentTypes";
 
 export default function CreateResumePage() {
   const [cities, setCities] = useState([]);
@@ -18,6 +21,7 @@ export default function CreateResumePage() {
   const [skills, setSkills] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [workingHistories, setWorkingHistories] = useState([]);
+  const [employmentTypes, setEmploymentTypes] = useState([]);
 
   useEffect(() => {
     axios.get(`${END_POINT}/api/region/cities`, {}).then((res) => {
@@ -37,6 +41,13 @@ export default function CreateResumePage() {
     axios.get(`${END_POINT}/api/skills`, {}).then((res) => {
       console.log("did mount");
       setSkills(res.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get(`${END_POINT}/api/employment-types`, {}).then((res) => {
+      console.log("did mount");
+      setEmploymentTypes(res.data);
     });
   }, []);
 
@@ -174,6 +185,23 @@ export default function CreateResumePage() {
           items={skills}
           onSelect={onSelect}
         />
+
+        <h3 className="mtb4">Образование</h3>
+        <AddEducation onChange={() => {}} />
+
+        <h3 className="mtb4">Владение языками</h3>
+        <AddLanguage onChange={() => {}} />
+
+        <h3 className="mtb4">Другая важная информация</h3>
+        <SelectEmploymentTypes
+          employmentTypes={employmentTypes}
+          label={"График работы"}
+          size={"fieldset-md"}
+        />
+
+        <button className="button button-primary">
+          Сохранить и опубликовать
+        </button>
       </div>
     </main>
   );

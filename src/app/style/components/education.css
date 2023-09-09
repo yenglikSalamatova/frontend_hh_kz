@@ -1,0 +1,16 @@
+.education {
+  position: relative;
+}
+
+.education span {
+  position: absolute;
+  top: 20px;
+  left: 53%;
+  cursor: pointer;
+}
+
+.eds a {
+  color: #1785e5;
+  text-decoration: underline;
+  cursor: pointer;
+}

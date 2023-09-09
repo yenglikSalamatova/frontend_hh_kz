@@ -1,0 +1,10 @@
+.language {
+  position: relative;
+}
+
+.language span {
+  position: absolute;
+  top: 20px;
+  left: 53%;
+  cursor: pointer;
+}
