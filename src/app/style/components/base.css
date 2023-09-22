@@ -21,6 +21,14 @@ p {
   display: flex;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
 .flex-cl {
   flex-direction: column;
 }
@@ -39,6 +47,18 @@ p {
 
 .flex-ai-sb {
   align-items: space-between;
+}
+
+.flex-g1 {
+  gap: 10px;
+}
+
+.flex-g2 {
+  gap: 20px;
+}
+
+.flex-g6 {
+  gap: 60px;
 }
 
 .p0 {
@@ -107,4 +127,8 @@ p {
 
 .mtb6 {
   margin: 40px 0;
+}
+
+.link {
+  color: #1785e5;
 }

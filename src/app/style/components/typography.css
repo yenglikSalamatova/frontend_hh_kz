@@ -2,6 +2,7 @@ h1 {
   font-size: 26px;
   font-weight: 700;
 }
+
 .text-light {
   color: #909090;
 }
@@ -25,4 +26,19 @@ h5 {
   color: #1785e5;
   font-size: 18px;
   font-weight: 700;
+}
+
+.p-secondary {
+  font-size: 14px;
+  color: #909090;
+}
+
+.p-bold {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.h3-secondary {
+  color: #909090;
+  font-weight: 500;
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../input";
 
 export default function AutoCompleteSelect({
@@ -17,7 +17,6 @@ export default function AutoCompleteSelect({
 
   const onClick = (item) => {
     console.log("click" + item);
-    onSelect(item);
     setSelected(item);
     setFilteredItems([]);
     setValue("");
@@ -25,7 +24,6 @@ export default function AutoCompleteSelect({
 
   const reset = () => {
     setSelected({ name: "" });
-    onSelect(null);
   };
 
   const onChange = (e) => {
@@ -38,6 +36,10 @@ export default function AutoCompleteSelect({
       ]);
     }
   };
+
+  useEffect(() => {
+    onSelect(selected);
+  }, [selected]);
 
   return (
     <div className={"autoComplete" + " size"}>

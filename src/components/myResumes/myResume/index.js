@@ -1,13 +1,16 @@
+import Link from "next/link";
 export default function MyResume({ item }) {
   return (
     <div className="card mtb4">
-      <a className="a-h3">{item.position}</a>
+      <Link className="a-h3" href={`/resumes/${item.id}`}>
+        {item.position}
+      </Link>
       <p>Создан {item.createdAt}</p>
       <h4 className="mtb2">Статистика за все время</h4>
       <div className="flex">
-        <a className="p3">{item.stats.shows} показов</a>
-        <a className="p3">{item.stats.views} просмотров</a>
-        <a className="p3">{item.stats.applies} приглашений</a>
+        <a className="p3">0 показов</a>
+        <a className="p3">0 просмотров</a>
+        <a className="p3">0 приглашений</a>
       </div>
     </div>
   );

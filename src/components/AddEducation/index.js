@@ -17,7 +17,7 @@ export default function AddEducation({ onChange }) {
     setEducation((prev) => [
       ...prev,
       {
-        level: "",
+        level: "Среднее",
         university_name: "",
         faculty: "",
         major: "",

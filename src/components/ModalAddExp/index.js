@@ -49,7 +49,7 @@ export default function ModalAddExp({ onToggle, addWorkingHistory }) {
       start_date: startDate,
       end_date: endDate,
       company_name: company,
-      position: position,
+      company_description: position,
       responsibilities: duties,
     };
     addWorkingHistory(workingHistory);

@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SelectEmploymentTypes({
   employmentTypes,
   label,
   size,
+  onChange,
 }) {
   const [eTypes, setETypes] = useState([]);
-
   const onSelect = (e) => {
     const tps = [...eTypes];
     if (e.target.checked && !tps.includes(e.target.value * 1)) {
@@ -20,6 +20,10 @@ export default function SelectEmploymentTypes({
 
     console.log(eTypes);
   };
+
+  useEffect(() => {
+    onChange(eTypes);
+  }, [eTypes]);
 
   return (
     <div>

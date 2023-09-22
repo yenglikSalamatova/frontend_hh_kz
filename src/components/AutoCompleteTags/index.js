@@ -16,6 +16,7 @@ export default function AutoCompleteTags({
 
   useEffect(() => {
     setFilteredItems((prev) => prev.filter((item) => !selected.includes(item)));
+    onSelect(selected);
   }, [selected]);
 
   const onClick = (item) => {

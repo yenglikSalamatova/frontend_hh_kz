@@ -3,8 +3,12 @@ import Image from "next/image";
 import searchIcon from "../../app/images/search.svg";
 import logo from "../../app/images/hh_logo.svg";
 import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/app/store/slices/authSlice";
 
 export default function Header() {
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const dispatch = useDispatch();
   return (
     <header className="header">
       <div className="container">
@@ -28,9 +32,19 @@ export default function Header() {
             >
               Создать резюме
             </Link>
-            <Link href="/login" className="header-button ">
-              Войти
-            </Link>
+            {!isAuth ? (
+              <Link href="/login" className="header-button ">
+                Войти
+              </Link>
+            ) : (
+              <Link
+                href="/"
+                className="header-button"
+                onClick={() => dispatch(logout())}
+              >
+                Выйти
+              </Link>
+            )}
           </div>
         </div>
       </div>

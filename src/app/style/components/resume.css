@@ -1,0 +1,15 @@
+.resume {
+  width: 80%;
+}
+
+.resume-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+.skill {
+  font-size: 14px;
+  padding: 10px;
+  background-color: #eaeaea;
+  border-radius: 3px;
+}

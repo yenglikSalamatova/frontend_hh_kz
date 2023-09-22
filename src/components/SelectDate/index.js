@@ -1,15 +1,32 @@
-export default function SelectDate({ label, size }) {
+"use client";
+import { useState, useEffect } from "react";
+
+export default function SelectDate({ label, size, onChange }) {
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+
   const onChangeDay = (e) => {
-    console.log(e.target.value);
+    setDay(e.target.value);
   };
 
   const onChangeMonth = (e) => {
-    console.log(e.target.value);
+    setMonth(e.target.value);
   };
 
   const onChangeYear = (e) => {
-    console.log(e.target.value);
+    setYear(e.target.value);
   };
+
+  useEffect(() => {
+    if (!day || !month || !year) return;
+    const date = new Date();
+    date.setFullYear(year);
+    date.setMonth(month);
+    date.setDate(day);
+    onChange(date);
+    console.log(date);
+  }, [day, month, year]);
 
   return (
     <fieldset className={"fieldset " + size}>
@@ -20,8 +37,9 @@ export default function SelectDate({ label, size }) {
           type="number"
           onChange={onChangeDay}
           placeholder="День"
+          value={day}
         />
-        <select onChange={onChangeMonth} className="input select">
+        <select onChange={onChangeMonth} className="input select" value={month}>
           <option value="" disabled hidden>
             Месяц
           </option>
@@ -43,6 +61,7 @@ export default function SelectDate({ label, size }) {
           className="input"
           type="number"
           onChange={onChangeYear}
+          value={year}
         />
       </div>
     </fieldset>

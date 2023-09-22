@@ -1,12 +1,57 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  authorize,
+  sendVerificationEmail,
+  verifyCode,
+} from "@/app/store/slices/authSlice";
+import { useRouter } from "next/navigation";
 
 export default function UserLogin() {
   const [step, setStep] = useState(1);
+  const [email, setEmail] = useState("");
+  const [time, setTime] = useState(120);
+  const [code, setCode] = useState("");
+
+  const router = useRouter();
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
+  const dispatch = useDispatch();
+
+  const sendVerifyEmail = () => {
+    dispatch(sendVerificationEmail(email));
+    setStep(2);
+  };
+
+  useEffect(() => {
+    let interval;
+    if (step === 2) {
+      interval = setInterval(() => {
+        if (time !== 0) setTime((prev) => prev - 1);
+      }, 1000);
+    } else if (interval) {
+      clearInterval(interval);
+    }
+  }, [step]);
+
+  useEffect(() => {
+    if (isAuth) {
+      router.replace("/resumes");
+    }
+  }, [isAuth]);
+
+  const min = parseInt(time / 60);
+  const sec = time % 60;
+
+  const verifyCodeFunc = () => {
+    dispatch(verifyCode(email, code));
+  };
 
   return (
     <section className="login-page">
+      {isAuth ? "true" : "false"}
       {step === 1 && (
         <div className="card">
           <h1>Поиск работы</h1>
@@ -15,11 +60,10 @@ export default function UserLogin() {
               className="input"
               type="text"
               placeholder="Электронная почта или телефон"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <button
-              className="button button-primary"
-              onClick={() => setStep(2)}
-            >
+            <button className="button button-primary" onClick={sendVerifyEmail}>
               Продолжить
             </button>
           </form>
@@ -40,17 +84,26 @@ export default function UserLogin() {
 
       {step === 2 && (
         <div className="card">
-          <h1>Отправили код на ...</h1>
+          <h1>Отправили код на {email}</h1>
           <form>
             <p>
               Напишите его, чтобы подтвердить, что это вы, а не кто-то другой
               входит в личный кабинет
             </p>
-            <input className="input" type="text" placeholder="Введите код" />
-            <p className="text-light">Повторить можно через 00:30</p>
+            <input
+              className="input"
+              type="text"
+              placeholder="Введите код"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+            />
+            <p className="text-light">
+              Повторить можно через {min}:{sec}
+            </p>
             <button
+              type="button"
               className="button button-primary"
-              onClick={() => setStep(3)}
+              onClick={verifyCodeFunc}
             >
               Продолжить
             </button>
@@ -63,14 +116,20 @@ export default function UserLogin() {
           </form>
         </div>
       )}
-
+      {/*
       {step === 3 && (
         <div className="card">
           <h1>Давайте познакомимся</h1>
           <form>
             <input className="input" type="text" placeholder="Имя" />
             <input className="input" type="text" placeholder="Фамилия" />
-            <button className="button button-primary">Продолжить</button>
+            <button
+              type="button"
+              className="button button-primary"
+              onClick={() => dispatch(authorize())}
+            >
+              Продолжить
+            </button>
             <button
               className="button button-primary--bordered"
               onClick={() => setStep(2)}
@@ -79,7 +138,7 @@ export default function UserLogin() {
             </button>
           </form>
         </div>
-      )}
+      )} */}
     </section>
   );
 }
