@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-export default function AddLanguage({ onChange }) {
-  const [foreignLanguages, setForeignLanguages] = useState([
-    { name: "Английский", level: "A1" },
-  ]);
-
+export default function AddLanguage({ onChange, foreignLanguages }) {
   const remove = (index) => {
-    setForeignLanguages((prev) => {
+    onChange((prev) => {
       return prev.filter((item, i) => i !== index);
     });
   };
@@ -16,12 +12,8 @@ export default function AddLanguage({ onChange }) {
     const [key, index] = e.target.name.split("-");
     let langs = [...foreignLanguages];
     langs[index][key] = e.target.value;
-    setForeignLanguages(langs);
+    onChange(langs);
   };
-
-  useEffect(() => {
-    onChange(foreignLanguages);
-  }, [foreignLanguages]);
 
   const lns = foreignLanguages.map((item, index) => {
     return (

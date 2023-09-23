@@ -11,6 +11,7 @@ export default function ResumePage() {
   const resume = useSelector((state) => state.resume.resume);
   const dispatch = useDispatch();
   const { id } = useParams();
+
   useEffect(() => {
     dispatch(getResumeById(id));
   }, []);

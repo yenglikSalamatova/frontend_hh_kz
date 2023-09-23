@@ -9,10 +9,17 @@ export default function AutoCompleteTags({
   size,
   items,
   onSelect,
+  selectedItems,
 }) {
   const [value, setValue] = useState("");
   const [selected, setSelected] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+
+  useEffect(() => {
+    if (selectedItems) {
+      setSelected(items.filter((item) => selectedItems.includes(item.name)));
+    }
+  }, [selectedItems, items]);
 
   useEffect(() => {
     setFilteredItems((prev) => prev.filter((item) => !selected.includes(item)));

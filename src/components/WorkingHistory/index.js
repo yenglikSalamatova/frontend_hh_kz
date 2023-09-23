@@ -1,12 +1,12 @@
 export default function WorkingHistory({ item, remove }) {
-  const startDate = item.start_date
+  const startDate = new Date(item.start_date)
     .toLocaleDateString("ru-RU", {
       month: "long",
       year: "numeric",
     })
     .replace(" г.", "");
 
-  const endDate = item.end_date
+  const endDate = new Date(item.end_date)
     .toLocaleDateString("ru-RU", {
       month: "long",
       year: "numeric",

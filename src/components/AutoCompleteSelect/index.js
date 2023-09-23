@@ -10,10 +10,19 @@ export default function AutoCompleteSelect({
   size,
   items,
   onSelect,
+  selectedItem,
 }) {
   const [value, setValue] = useState("");
   const [selected, setSelected] = useState({ name: "" });
   const [filteredItems, setFilteredItems] = useState([]);
+
+  useEffect(() => {
+    if (selectedItem > 0) {
+      items.map((item) => {
+        if (item.id === selectedItem) setSelected(item);
+      });
+    }
+  }, [selectedItem, items]);
 
   const onClick = (item) => {
     console.log("click" + item);

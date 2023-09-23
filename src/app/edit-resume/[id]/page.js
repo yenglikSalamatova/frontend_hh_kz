@@ -15,10 +15,12 @@ import AddEducation from "@/components/AddEducation";
 import AddLanguage from "@/components/AddLanguage";
 import SelectEmploymentTypes from "@/components/SelectEmploymentTypes";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createResume } from "@/app/store/slices/resumesSlice";
+import { useParams } from "next/navigation";
+import { getResumeById } from "@/app/store/slices/resumesSlice";
 
-export default function CreateResumePage() {
+export default function EditResumePage() {
   const [cities, setCities] = useState([]);
   const [countries, setCountries] = useState([]);
   const [skills, setSkills] = useState([]);
@@ -37,38 +39,37 @@ export default function CreateResumePage() {
   const [salary_type, setSalaryType] = useState("tenge");
   const [skillsNames, setSkillsNames] = useState("");
   const [education, setEducation] = useState([]);
-  const [foreignLanguages, setForeignLanguages] = useState([]);
+  const [foreignLanguages, setForeignLanguages] = useState([
+    { name: "Английский", level: "A1" },
+  ]);
   const [employmentTypesIds, setEmploymentTypesIds] = useState([]);
   const [about, setAbout] = useState("");
+
+  const { id } = useParams();
+  const resume = useSelector((state) => state.resume.resume);
+
+  useEffect(() => {
+    dispatch(getResumeById(id));
+  }, []);
+  console.log(resume);
 
   const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
     axios.get(`${END_POINT}/api/region/cities`, {}).then((res) => {
-      console.log(res);
-      console.log("did mount");
       setCities(res.data);
     });
-  }, []);
-
-  useEffect(() => {
     axios.get(`${END_POINT}/api/region/countries`, {}).then((res) => {
-      console.log("did mount");
       setCountries(res.data);
     });
-  }, []);
-
-  useEffect(() => {
     axios.get(`${END_POINT}/api/skills`, {}).then((res) => {
-      console.log("did mount");
       setSkills(res.data);
     });
-  }, []);
-
-  useEffect(() => {
     axios.get(`${END_POINT}/api/employment-types`, {}).then((res) => {
-      console.log("did mount");
+      setEmploymentTypes(res.data);
+    });
+    axios.get(`${END_POINT}/api/employment-types`, {}).then((res) => {
       setEmploymentTypes(res.data);
     });
   }, []);
@@ -143,6 +144,28 @@ export default function CreateResumePage() {
     main_language: "",
   });
 
+  useEffect(() => {
+    if (resume.id) {
+      console.log(resume);
+      setName(resume.first_name);
+      setSurname(resume.last_name);
+      setPhone(resume.phone);
+      setCity(resume.cityId);
+      setBirthday(resume.birthday);
+      setGender(resume.gender);
+      setCitizenship(resume.citizenship);
+      setPosition(resume.position);
+      setSalary(resume.salary);
+      setSalaryType(resume.salary_type);
+      setWorkingHistories(resume.workingHistories);
+      setAbout(resume.about);
+      setSkillsNames(resume.skills);
+      setEducation(resume.education);
+      setForeignLanguages(resume.foreignLanguages);
+      setEmploymentTypesIds(resume.employmentTypes.map((item) => item.id));
+    }
+  }, [resume]);
+
   return (
     <main>
       <Header />
@@ -155,18 +178,21 @@ export default function CreateResumePage() {
           type="text"
           size="fieldset-md"
           onChange={(e) => setName(e.target.value)}
+          value={first_name}
         />
         <Input
           label="Фамилия"
           type="text"
           size="fieldset-md"
           onChange={(e) => setSurname(e.target.value)}
+          value={last_name}
         />
         <Input
           label="Мобильный телефон"
           type="text"
           size="fieldset-md"
           onChange={(e) => setPhone(e.target.value)}
+          value={phone}
         />
         <AutoCompleteSelect
           label="Город проживания"
@@ -174,6 +200,7 @@ export default function CreateResumePage() {
           size="fieldset-md"
           items={cities}
           onSelect={(data) => setCity(data.id)}
+          selectedItem={cityId}
         />
 
         <h3 className="mtb4">Основная информация</h3>
@@ -181,6 +208,7 @@ export default function CreateResumePage() {
           size="fieldset-sm"
           label="Дата рождения"
           onChange={(date) => setBirthday(date)}
+          selected={birthday}
         />
         <fieldset className={"fieldset fieldset-start fieldset-md"}>
           <label>Пол</label>
@@ -192,6 +220,7 @@ export default function CreateResumePage() {
                 id="g1"
                 value={"Мужской"}
                 onChange={(e) => setGender(e.target.value)}
+                checked={gender === "Мужской"}
               />
               <label htmlFor="g1">Мужской</label>
             </div>
@@ -203,6 +232,7 @@ export default function CreateResumePage() {
                 id="g2"
                 value={"Женский"}
                 onChange={(e) => setGender(e.target.value)}
+                checked={gender === "Женский"}
               />
               <label htmlFor="g2">Женский</label>
             </div>
@@ -215,6 +245,7 @@ export default function CreateResumePage() {
           size="fieldset-md"
           items={countries}
           onSelect={(data) => setCitizenship(data.id)}
+          selectedItem={citizenship}
         />
 
         <h3 className="mtb4">Специальность</h3>
@@ -223,6 +254,7 @@ export default function CreateResumePage() {
           type="text"
           size="fieldset-lg"
           onChange={(e) => setPosition(e.target.value)}
+          value={position}
         />
         <fieldset className={"fieldset fieldset-md"}>
           <label>Зарплата</label>
@@ -291,6 +323,7 @@ export default function CreateResumePage() {
           size="fieldset-lg"
           items={skills}
           onSelect={onSkillsChange}
+          selectedItems={skillsNames}
         />
 
         <h3 className="mtb4">Образование</h3>
@@ -298,6 +331,7 @@ export default function CreateResumePage() {
           onChange={(education) => {
             setEducation(education);
           }}
+          education={education}
         />
 
         <h3 className="mtb4">Владение языками</h3>
@@ -305,11 +339,13 @@ export default function CreateResumePage() {
           onChange={(langs) => {
             setForeignLanguages(langs);
           }}
+          foreignLanguages={foreignLanguages}
         />
 
         <h3 className="mtb4">Другая важная информация</h3>
         <SelectEmploymentTypes
           employmentTypes={employmentTypes}
+          selected={employmentTypesIds}
           label={"График работы"}
           size={"fieldset-md"}
           onChange={(types) => {
@@ -318,7 +354,7 @@ export default function CreateResumePage() {
         />
 
         <button className="button button-primary" onClick={handleSave}>
-          Сохранить и опубликовать
+          Отредактировать
         </button>
       </div>
     </main>

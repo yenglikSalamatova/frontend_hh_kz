@@ -5,25 +5,17 @@ export default function SelectEmploymentTypes({
   label,
   size,
   onChange,
+  selected,
 }) {
-  const [eTypes, setETypes] = useState([]);
   const onSelect = (e) => {
-    const tps = [...eTypes];
-    if (e.target.checked && !tps.includes(e.target.value * 1)) {
-      tps.push(e.target.value * 1);
-      setETypes(tps);
-    } else if (!e.target.checked && tps.includes(e.target.value * 1)) {
-      const index = tps.indexOf(e.target.value * 1);
-      tps.splice(index, 1);
-      setETypes(tps);
-    }
-
-    console.log(eTypes);
+    const value = e.target.value * 1;
+    const updatedSelected = selected.includes(value)
+      ? selected.filter((item) => item !== value)
+      : [...selected, value];
+    onChange(updatedSelected);
   };
 
-  useEffect(() => {
-    onChange(eTypes);
-  }, [eTypes]);
+  console.log(selected);
 
   return (
     <div>
@@ -38,6 +30,7 @@ export default function SelectEmploymentTypes({
                 id={type.id + "-type"}
                 value={type.id}
                 onChange={onSelect}
+                checked={selected.includes(type.id * 1)}
               />
               <label htmlFor={type.id + "-type"}>{type.name}</label>
             </div>

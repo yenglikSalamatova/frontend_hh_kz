@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export default function SelectDate({ label, size, onChange }) {
+export default function SelectDate({ label, size, onChange, selected }) {
   const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -17,6 +17,15 @@ export default function SelectDate({ label, size, onChange }) {
   const onChangeYear = (e) => {
     setYear(e.target.value);
   };
+
+  useEffect(() => {
+    if (selected) {
+      const date = new Date(selected);
+      setDay(date.getDate());
+      setMonth(date.getMonth());
+      setYear(date.getFullYear());
+    }
+  }, [selected]);
 
   useEffect(() => {
     if (!day || !month || !year) return;
