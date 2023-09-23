@@ -15,10 +15,17 @@ export const resumeSlice = createSlice({
     setMyResume: (state, action) => {
       state.resume = action.payload;
     },
+    handleDeleteResume: (state, action) => {
+      const newResumes = state.resumes.filter(
+        (item) => item.id !== action.payload
+      );
+      state.resumes = newResumes;
+    },
   },
 });
 
-export const { setMyResumes, setMyResume } = resumeSlice.actions;
+export const { setMyResumes, setMyResume, handleDeleteResume } =
+  resumeSlice.actions;
 
 export const getMyResumes = () => async (dispatch) => {
   try {
@@ -48,6 +55,28 @@ export const getResumeById = (id) => async (dispatch) => {
     dispatch(setMyResume(response.data));
   } catch (error) {
     alert("Ошибка при загрузке резюме");
+    console.log(error);
+  }
+};
+
+export const editResume = (data, router) => async (dispatch) => {
+  try {
+    const res = await axios.put(`${END_POINT}/api/resume/`, data);
+    if (res.status === 200) {
+      router.push(`/resumes/${data.id}`);
+    }
+  } catch (error) {
+    alert("Ошибка при редактировании резюме");
+    console.log(error);
+  }
+};
+
+export const deleteResume = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`${END_POINT}/api/resume/${id}`);
+    dispatch(handleDeleteResume(id));
+  } catch (error) {
+    alert("Ошибка при удалении резюме");
     console.log(error);
   }
 };

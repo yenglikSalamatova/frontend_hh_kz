@@ -16,7 +16,7 @@ import AddLanguage from "@/components/AddLanguage";
 import SelectEmploymentTypes from "@/components/SelectEmploymentTypes";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { createResume } from "@/app/store/slices/resumesSlice";
+import { editResume } from "@/app/store/slices/resumesSlice";
 import { useParams } from "next/navigation";
 import { getResumeById } from "@/app/store/slices/resumesSlice";
 
@@ -99,8 +99,9 @@ export default function EditResumePage() {
 
   const handleSave = () => {
     dispatch(
-      createResume(
+      editResume(
         {
+          id: resume.id,
           first_name,
           last_name,
           gender,

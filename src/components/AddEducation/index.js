@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 
 export default function AddEducation({ onChange, education }) {
   const onChangeData = (e) => {
-    console.log(e.target.name, e.target.value);
-    const [index, name] = e.target.name.split("-");
-    console.log(index, name);
+    const { name, value } = e.target;
+    const [index, key] = name.split("-");
 
-    let ed = [...education];
-    ed[index][name] = e.target.value;
-    onChange(ed);
+    let updatedEducation = [...education];
+    updatedEducation[index] = {
+      ...updatedEducation[index],
+      [key]: value,
+    };
+
+    onChange(updatedEducation);
   };
 
   const newEducation = () => {
@@ -88,7 +91,7 @@ export default function AddEducation({ onChange, education }) {
             type="text"
             className="input"
             onChange={onChangeData}
-            value={education.end_date}
+            value={new Date(education.end_date).getFullYear()}
             name={index + "-end_date"}
           />
         </fieldset>
