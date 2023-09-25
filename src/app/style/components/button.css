@@ -54,3 +54,11 @@
   justify-content: flex-end;
   gap: 10px;
 }
+
+.btn-link {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: #1785e5;
+  cursor: pointer;
+}

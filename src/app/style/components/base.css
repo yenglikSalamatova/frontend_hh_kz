@@ -6,6 +6,10 @@ a {
   text-decoration: none;
 }
 
+textarea {
+  font-family: inherit;
+}
+
 .container {
   display: block;
   max-width: 1250px;
@@ -131,4 +135,8 @@ p {
 
 .link {
   color: #1785e5;
+}
+
+.error {
+  color: #ff0000;
 }

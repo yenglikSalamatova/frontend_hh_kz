@@ -1,0 +1,36 @@
+.bg {
+  background-image: url("../../../../public/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.signup {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+.signup .container {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.signup .container .card {
+  background-color: #fff;
+  gap: 15px;
+  align-items: flex-start;
+}
+.card .button-primary {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.signup .container .card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

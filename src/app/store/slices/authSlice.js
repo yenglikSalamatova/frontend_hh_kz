@@ -8,6 +8,7 @@ let initialState = {
   isAuth: false,
   currentUser: null,
   tokenExt: 0,
+  error: null,
 };
 
 console.log(token);
@@ -59,11 +60,15 @@ export const authSlice = createSlice({
       state.tokenExt = 0;
       localStorage.removeItem("token");
     },
+
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { authorize, logout } = authSlice.actions;
+export const { authorize, logout, setError } = authSlice.actions;
 
 export const sendVerificationEmail = (email) => (dispatch) => {
   axios.post(`${END_POINT}/api/auth/sendmail`, { email });
@@ -73,6 +78,40 @@ export const verifyCode = (email, code) => (dispatch) => {
   axios
     .post(`${END_POINT}/api/auth/verifycode`, { email, code })
     .then((res) => dispatch(authorize(res.data)));
+};
+
+export const signUpCompany = (data, router) => async (dispatch) => {
+  try {
+    const fd = new FormData();
+
+    for (let key in data) {
+      fd.append(key, data[key]);
+    }
+    const res = await axios.post(`${END_POINT}/api/auth/signup`, fd);
+    console.log(res);
+    if (res.status >= 200 && res.status < 300) {
+      router.push("/employer/signin");
+    }
+  } catch (error) {
+    dispatch(setError(error.response.data));
+    console.log(error);
+  }
+};
+
+export const signInCompany = (data, router) => async (dispatch) => {
+  try {
+    const res = await axios.post(`${END_POINT}/api/auth/login`, data);
+    console.log(res, data);
+    if (res.status >= 200 && res.status < 300) {
+      dispatch(authorize(res.data));
+      router.push("/vacancy");
+    }
+  } catch (error) {
+    if (error.response && error.response.data)
+      dispatch(setError(error.response.data));
+
+    console.log(error);
+  }
 };
 
 export default authSlice.reducer;
