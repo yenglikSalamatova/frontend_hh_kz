@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setError, signInCompany } from "@/app/store/slices/authSlice";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function EmployerSignIn() {
   const [email, setEmail] = useState("");
@@ -26,7 +27,10 @@ export default function EmployerSignIn() {
   return (
     <main className="bg signup">
       <div className="container">
-        <Image src="/images/hh_logo.svg" width={50} height={50} alt="Logo" />
+        <Link href="/">
+          <Image src="/images/hh_logo.svg" width={50} height={50} alt="Logo" />
+        </Link>
+
         <div className="card">
           <h1>Вход для поиска сотрудников</h1>
           <form>
@@ -58,6 +62,9 @@ export default function EmployerSignIn() {
             >
               Войти
             </button>
+            <Link href="/employer/signup" className="btn-link">
+              Зарегистрироваться
+            </Link>
           </form>
         </div>
       </div>

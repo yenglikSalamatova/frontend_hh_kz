@@ -1,0 +1,19 @@
+.specType {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.specType.active img {
+  transform: rotate(90deg);
+}
+
+.spec {
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  gap: 10px;
+  padding: 0 0 0 20px;
+}

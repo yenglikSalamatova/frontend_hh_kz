@@ -8,6 +8,7 @@ import {
   verifyCode,
 } from "@/app/store/slices/authSlice";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function UserLogin() {
   const [step, setStep] = useState(1);
@@ -75,9 +76,12 @@ export default function UserLogin() {
           <h1>Поиск сотрудников</h1>
           <form>
             <p>Размещение вакансий и доступ к базе резюме</p>
-            <button className="button button-primary--bordered">
+            <Link
+              href="/employer/signin"
+              className="button button-primary--bordered"
+            >
               Я ищу сотрудников
-            </button>
+            </Link>
           </form>
         </div>
       )}

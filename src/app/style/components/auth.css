@@ -34,3 +34,9 @@
   flex-direction: column;
   gap: 15px;
 }
+
+.signup .btn-link {
+  font-size: 15px;
+  text-align: center;
+  text-decoration: underline;
+}
