@@ -63,3 +63,7 @@
   background-color: transparent;
   border: 1px solid rgb(154, 154, 154);
 }
+
+.create-vacancy .tags {
+  margin: 0;
+}

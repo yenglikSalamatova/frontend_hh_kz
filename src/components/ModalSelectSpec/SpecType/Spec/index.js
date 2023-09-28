@@ -6,6 +6,7 @@ export default function Spec({ spec, onChange, specializationId }) {
       <input
         type="radio"
         name="spec"
+        data-name={spec.name}
         value={spec.id}
         id={spec.id}
         onChange={onChange}

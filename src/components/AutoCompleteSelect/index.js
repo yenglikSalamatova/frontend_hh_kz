@@ -51,7 +51,7 @@ export default function AutoCompleteSelect({
   }, [selected]);
 
   return (
-    <div className={"autoComplete" + " size"}>
+    <div className={"autoComplete " + size}>
       <Input
         label={label}
         placeholder={placeholder}

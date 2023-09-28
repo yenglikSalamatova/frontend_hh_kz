@@ -3,7 +3,7 @@ import Image from "next/image";
 import Header from "@/components/header";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyVacancies } from "@/app/store/slices/vacancySlice";
+import { getMyVacancies, deleteVacancy } from "@/app/store/slices/vacancySlice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import MyVacancies from "@/components/myvacancies";

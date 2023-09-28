@@ -59,7 +59,7 @@ export default function AutoCompleteTags({
             </div>
           ))}
       </div>
-      <div className={"autoComplete" + " size"}>
+      <div className={"autoComplete " + size}>
         <Input
           label={label}
           placeholder={placeholder}
